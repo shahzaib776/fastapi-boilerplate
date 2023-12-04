@@ -1,8 +1,8 @@
 """create_main_tables
  
-Revision ID: 74c5b0b1fd73
+Revision ID: d1d3120f3a7c
 Revises: 
-Create Date: 2023-11-30 19:32:14.100520
+Create Date: 2023-12-04 11:50:47.178780
  
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
  
 # revision identifiers, used by Alembic
-revision = '74c5b0b1fd73'
+revision = 'd1d3120f3a7c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,12 +23,11 @@ def create_cleanings_table() -> None:
         sa.Column("description", sa.Text, nullable=True),
         sa.Column("cleaning_type", sa.Text, nullable=False, server_default="spot_clean"),
         sa.Column("price", sa.Numeric(10, 2), nullable=False),
-    )
+    ) 
  
 def upgrade() -> None:
-    pass
+    create_cleanings_table()
  
  
 def downgrade() -> None:
-    pass
- 
+    op.drop_table("cleanings")

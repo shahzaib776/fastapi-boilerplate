@@ -8,12 +8,14 @@ ENV PYTHONBUFFERED 1
 # install system dependencies
 RUN apt-get update \
   && apt-get -y install netcat gcc postgresql \
-  && apt-get clean
+  && apt-get clean \
+  && apt-get install libpq-dev build-essential -y
  
 # install python dependencies
 RUN pip install --upgrade pip
 COPY ./requirements.txt /backend/requirements.txt
 RUN pip install -r requirements.txt
+RUN pip3 install psycopg2
  
 COPY . /backend
  
